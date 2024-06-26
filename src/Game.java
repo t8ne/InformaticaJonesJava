@@ -1,13 +1,22 @@
 import java.util.Scanner;
 
-//Feito por: António Rebelo - Nº28837 - ECGM
-
+/**
+ * A classe Game representa a lógica do jogo.
+ *
+ * <p>Contém métodos para iniciar e processar comandos do jogador.</p>
+ *
+ * @author António Rebelo - Nº28837 - ECGM
+ */
 public class Game {
     private Board board;
     private Player player;
     private boolean isRunning;
     private int moves;
 
+    /**
+     * Construtor da classe Game.
+     * Inicializa o tabuleiro, jogador e configura o estado inicial do jogo.
+     */
     public Game() {
         this.board = new Board();
         this.player = new Player();
@@ -15,6 +24,9 @@ public class Game {
         this.moves = 0;
     }
 
+    /**
+     * Inicia o loop principal do jogo.
+     */
     public void start() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Iniciando o jogo...");
@@ -29,6 +41,11 @@ public class Game {
         scanner.close();
     }
 
+    /**
+     * Processa o comando do jogador.
+     *
+     * @param command O comando inserido pelo jogador.
+     */
     private void processCommand(String command) {
         if (command.length() == 0) {
             System.out.println("Comando inválido. Por favor, tente novamente.");

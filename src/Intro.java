@@ -1,8 +1,14 @@
 import java.util.Scanner;
 
-//Feito por: António Rebelo - Nº28837 - ECGM
-
+/**
+ * A classe Intro exibe as instruções do jogo e inicia o jogo.
+ *
+ * @author António Rebelo - Nº28837 - ECGM
+ */
 public class Intro {
+    /**
+     * Exibe as instruções do jogo e pergunta ao jogador se deseja iniciar.
+     */
     public void showInstructions() {
         System.out.println("Bem-vindo ao jogo Informática Jones e o Tablet Perdido!");
         System.out.println("Instruções do Jogo:");
@@ -43,4 +49,3 @@ public class Intro {
         }
     }
 }
-

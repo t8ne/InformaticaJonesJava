@@ -1,30 +1,41 @@
-//Feito por: António Rebelo - Nº28837 - ECGM
-
+/**
+ * A classe Board representa o tabuleiro do jogo.
+ *
+ * <p>Contém métodos para inicializar, exibir e manipular o tabuleiro.</p>
+ *
+ * @author António Rebelo - Nº28837 - ECGM
+ */
 public class Board {
     private final int width = 10;
     private final int height = 10;
     private char[][] board;
 
+    /**
+     * Construtor da classe Board.
+     * Inicializa o tabuleiro chamando o método initializeBoard.
+     */
     public Board() {
         board = new char[height][width];
         initializeBoard();
     }
 
+    /**
+     * Inicializa o tabuleiro com espaços em branco e adiciona paredes e objetos.
+     */
     private void initializeBoard() {
-        // Inicializar o tabuleiro com espaços em branco ou outros elementos
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 board[i][j] = ' ';
             }
         }
-
-        // Adicionar paredes e objetos conforme o exemplo
         addWalls();
         addObjects();
     }
 
+    /**
+     * Adiciona paredes ao tabuleiro.
+     */
     private void addWalls() {
-        // Exemplo de paredes, pode ser ajustado conforme necessário
         for (int i = 0; i < width; i++) {
             board[0][i] = 'W';
             board[height - 1][i] = 'W';
@@ -33,8 +44,6 @@ public class Board {
             board[i][0] = 'W';
             board[i][width - 1] = 'W';
         }
-
-        // Adicionar paredes internas conforme necessário
         board[2][2] = 'W';
         board[2][3] = 'W';
         board[2][4] = 'W';
@@ -49,19 +58,27 @@ public class Board {
         board[8][6] = 'W';
     }
 
+    /**
+     * Adiciona objetos ao tabuleiro.
+     */
     private void addObjects() {
-        // Adicionando objetos ao tabuleiro conforme o exemplo fornecido
-        board[1][1] = 'E'; // Barras Energéticas
-        board[3][4] = 'V'; // Veneno
-        board[5][5] = 'T'; // Tablet Perdido
-        board[6][7] = 'P'; // Portal
-        board[8][2] = 'J'; // Coordenador do Curso
-        board[3][2] = 'E'; // Barras Energéticas
-        board[7][1] = 'V'; // Veneno
-        board[2][7] = 'V'; // Veneno
-        board[4][2] = 'E'; // Barras Energéticas
+        board[1][1] = 'E';
+        board[3][4] = 'V';
+        board[5][5] = 'T';
+        board[6][7] = 'P';
+        board[8][2] = 'J';
+        board[3][2] = 'E';
+        board[7][1] = 'V';
+        board[2][7] = 'V';
+        board[4][2] = 'E';
     }
 
+    /**
+     * Exibe o tabuleiro no console, mostrando a posição do jogador.
+     *
+     * @param playerX A posição X do jogador.
+     * @param playerY A posição Y do jogador.
+     */
     public void display(int playerX, int playerY) {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
@@ -75,6 +92,12 @@ public class Board {
         }
     }
 
+    /**
+     * Exibe o conteúdo das células ao redor da posição especificada.
+     *
+     * @param x A posição X.
+     * @param y A posição Y.
+     */
     public void lookAround(int x, int y) {
         System.out.println("Olhando ao redor...");
         if (y > 0) System.out.println("Cima: " + board[y - 1][x]);
@@ -83,6 +106,15 @@ public class Board {
         if (x < width - 1) System.out.println("Direita: " + board[y][x + 1]);
     }
 
+    /**
+     * Verifica se é possível mover-se em uma determinada direção.
+     *
+     * @param x A posição X inicial.
+     * @param y A posição Y inicial.
+     * @param steps O número de passos a serem dados.
+     * @param direction A direção do movimento ('C', 'B', 'D', 'E').
+     * @return true se o movimento for possível, false caso contrário.
+     */
     public boolean isMovable(int x, int y, int steps, char direction) {
         switch (direction) {
             case 'C':
@@ -98,6 +130,16 @@ public class Board {
         }
     }
 
+    /**
+     * Método auxiliar para verificar a possibilidade de movimento em uma direção específica.
+     *
+     * @param x A posição X inicial.
+     * @param y A posição Y inicial.
+     * @param steps O número de passos a serem dados.
+     * @param deltaY A variação na coordenada Y por passo.
+     * @param deltaX A variação na coordenada X por passo.
+     * @return true se o movimento for possível, false caso contrário.
+     */
     private boolean isMovableInternal(int x, int y, int steps, int deltaY, int deltaX) {
         for (int i = 1; i <= steps; i++) {
             int newX = x + i * deltaX;
@@ -105,17 +147,28 @@ public class Board {
             if (newY < 0 || newY >= height || newX < 0 || newX >= width || board[newY][newX] == 'W') {
                 return false;
             }
-            if (i < steps && board[newY][newX] == ' ') {
-                continue;
-            }
         }
         return true;
     }
 
+    /**
+     * Retorna o caractere na posição especificada do tabuleiro.
+     *
+     * @param x A posição X.
+     * @param y A posição Y.
+     * @return O caractere na posição (x, y).
+     */
     public char getTile(int x, int y) {
         return board[y][x];
     }
 
+    /**
+     * Define o valor de uma célula específica no tabuleiro.
+     *
+     * @param x A posição X.
+     * @param y A posição Y.
+     * @param value O novo valor para a célula.
+     */
     public void setTile(int x, int y, char value) {
         board[y][x] = value;
     }
